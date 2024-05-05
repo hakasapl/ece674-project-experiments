@@ -7,6 +7,8 @@ sampling_period=$2
 while true; do
     start=$(date +%s.%N)
 
+    sum_0=$(powercap-info intel-rapl -z 0 -j)
+    sum_1=$(powercap-info intel-rapl -z 1 -j)
     core_0_val=$(powercap-info intel-rapl -z 0:0 -j)
     core_1_val=$(powercap-info intel-rapl -z 1:0 -j)
     dram_0_val=$(powercap-info intel-rapl -z 0:1 -j)
@@ -14,7 +16,7 @@ while true; do
 
     epoch_time=$(date +%s)
 
-    csv_str="$epoch_time,$core_0_val,$core_1_val,$dram_0_val,$dram_1_val"
+    csv_str="$epoch_time,$sum_0,$sum_1,$core_0_val,$core_1_val,$dram_0_val,$dram_1_val"
 
     echo $csv_str >> $output_file
 
