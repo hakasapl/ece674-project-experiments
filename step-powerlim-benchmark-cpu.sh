@@ -4,8 +4,6 @@ log_file=$1
 step_size=$2
 
 workers=$(nproc --all)
-mem_workers=32
-worker_size=128G
 
 initial_power=10  # Watts
 power_step=10  # Watts
@@ -23,22 +21,17 @@ while true; do
     fi
 
     # Set power caps (short and long)
-    powercap-set intel-rapl -z 0 -c 0 -l $i
-    powercap-set intel-rapl -z 0 -c 1 -l $i
-    powercap-set intel-rapl -z 1 -c 0 -l $i
-    powercap-set intel-rapl -z 1 -c 1 -l $i
+    powercap-set intel-rapl -z 0:0 -c 0 -l $i
+    powercap-set intel-rapl -z 1:0 -c 0 -l $i
 
     epoch=$(date +%s)
 
     # Log to file
     echo "$epoch,$i" >> $log_file
-    stress-ng -c $workers -m $mem_workers --vm-bytes $worker_size -t $step_size
+    stress-ng -c $workers -t $step_size
 
     i=$(($i+$power_step_u))
 done
 
-# Reset Short Power caps
-powercap-set intel-rapl -z 0 -c 0 -l 130000000
-powercap-set intel-rapl -z 0 -c 1 -l 200000000
-powercap-set intel-rapl -z 1 -c 0 -l 130000000
-powercap-set intel-rapl -z 1 -c 1 -l 200000000
+powercap-set intel-rapl -z 0:0 -c 0 -l 130000000
+powercap-set intel-rapl -z 1:0 -c 0 -l 130000000

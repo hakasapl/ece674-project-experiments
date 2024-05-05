@@ -7,10 +7,10 @@ sampling_period=$2
 while true; do
     start=$(date +%s.%N)
 
-    core_0_val=$(rapl-info -p 0 -z 0 -j)
-    core_1_val=$(rapl-info -p 1 -z 0 -j)
-    dram_0_val=$(rapl-info -p 0 -z 1 -j)
-    dram_1_val=$(rapl-info -p 1 -z 1 -j)
+    core_0_val=$(powercap-info intel-rapl -z 0:0 -j)
+    core_1_val=$(powercap-info intel-rapl -z 1:0 -j)
+    dram_0_val=$(powercap-info intel-rapl -z 0:1 -j)
+    dram_1_val=$(powercap-info intel-rapl -z 1:1 -j)
 
     epoch_time=$(date +%s)
 
