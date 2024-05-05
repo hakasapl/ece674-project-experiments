@@ -39,6 +39,6 @@ done
 
 # Reset Short Power caps
 powercap-set intel-rapl -z 0 -c 0 -l 130000000
-powercap-set intel-rapl -z 0 -c 1 -l 200000000
+powercap-set intel-rapl -z 0 -c 1 -l 130000000
 powercap-set intel-rapl -z 1 -c 0 -l 130000000
-powercap-set intel-rapl -z 1 -c 1 -l 200000000
+powercap-set intel-rapl -z 1 -c 1 -l 130000000

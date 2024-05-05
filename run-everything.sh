@@ -5,7 +5,7 @@ fi
 
 
 # start rapl logging
-output_folder="/opt/logs"
+output_folder=$1
 mkdir -p $output_folder
 
 ./log-rapl-power.sh $output_folder/log-rapl.csv 1 &
