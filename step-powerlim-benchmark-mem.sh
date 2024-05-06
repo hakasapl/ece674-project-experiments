@@ -34,5 +34,5 @@ while true; do
     i=$(($i+$power_step_u))
 done
 
-powercap-set intel-rapl -z 0:1 -c 1 -l 84000000
-powercap-set intel-rapl -z 1:1 -c 1 -l 84000000
+powercap-set intel-rapl -z 0:1 -c 0 -l 84000000
+powercap-set intel-rapl -z 1:1 -c 0 -l 84000000
